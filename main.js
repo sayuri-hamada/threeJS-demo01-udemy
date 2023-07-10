@@ -76,6 +76,28 @@ const directionalLight = new THREE.DirectionalLight('#ffffff', 4);
 directionalLight.position.set(0.5, 1, 0);
 scene.add(directionalLight);
 
+// ブラウザのリサイズ操作
+window.addEventListener('resize', () => {
+  // サイズのアップデート
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+
+  // カメラのアップデート
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  // レンダラーのアップデート
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(window.devicePixelRatio);
+})
+
+// アニメーション
+const animate = () => {
+  renderer.render(scene, camera);
+  window.requestAnimationFrame(animate);
+}
+
+animate();
 
 
-renderer.render(scene, camera);
+
