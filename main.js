@@ -103,9 +103,25 @@ window.addEventListener('resize', () => {
 });
 
 
+// ホイールを実装してみよう
+let speed = 0;
+let rotation = 0;
+window.addEventListener('wheel', (event) => {
+  // console.log('ホイールされました')
+  speed += event.deltaY * 0.0002;
+  console.log(speed);
+});
+
+function rot() {
+  rotation += speed;
+  speed *= 0.93;
+  mesh1.position.x = rotation;
+  window.requestAnimationFrame(rot);
+}
+rot();
+
 // アニメーション
 const clock = new THREE.Clock();
-
 
 const animate = () => {
   renderer.render(scene, camera);
